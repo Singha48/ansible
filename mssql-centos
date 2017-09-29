@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Adding MSSQL Repository
+      yum_repository:
+         name: packages-microsoft-com-mssql-server
+         description: mssql YUM repo
+         gpgcheck: yes
+         gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+         baseurl: https://packages.microsoft.com/rhel/7/mssql-server/
+         enabled: yes
+         state: present
+    - name: Install MSSQL
+      yum:
+         name: mssql-server
+         enablerepo: packages-microsoft-com-mssql-server
+         state: present
+
